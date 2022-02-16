@@ -26,7 +26,7 @@ from ..swin import SwinConfig
 
 
 MASKFORMER_PRETRAINED_CONFIG_ARCHIVE_MAP = [
-    "facebook/maskformer-swin-base-ade-640",
+    "facebook/Francesco/maskformer-swin-base-ade",
     # See all MaskFormer models at https://huggingface.co/models?filter=maskformer
 ]
 
@@ -37,7 +37,7 @@ class MaskFormerConfig(PretrainedConfig):
     r"""
     This is the configuration class to store the configuration of a [`MaskFormer`]. It is used to instantiate a
     MaskFormer model according to the specified arguments, defining the model architecture. Instantiating a
-    configuration with the defaults will yield a similar configuration to that of the "maskformer-swin-base-ade-640"
+    configuration with the defaults will yield a similar configuration to that of the "Francesco/maskformer-swin-base-ade"
     architecture trained on ade20k-150
 
     Configuration objects inherit from [`PretrainedConfig`] and can be used to control the model outputs. Read the
@@ -68,10 +68,10 @@ class MaskFormerConfig(PretrainedConfig):
     ```python
     >>> from transformers import MaskFormerModel, MaskFormerConfig
 
-    >>> # Initializing a maskFormer facebook/maskformer-swin-base-ade-640 configuration
+    >>> # Initializing a maskFormer facebook/Francesco/maskformer-swin-base-ade configuration
     >>> configuration = MaskFormerConfig()
 
-    >>> # Initializing a model from the facebook/maskformer-swin-base-ade-640 style configuration
+    >>> # Initializing a model from the facebook/Francesco/maskformer-swin-base-ade style configuration
     >>> model = MaskFormerModel(configuration)
 
     >>> # Accessing the model configuration

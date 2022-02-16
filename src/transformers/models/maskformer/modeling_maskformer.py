@@ -54,11 +54,11 @@ logger = logging.get_logger(__name__)
 
 
 _CONFIG_FOR_DOC = "MaskFormerConfig"
-_CHECKPOINT_FOR_DOC = "facebook/maskformer-swin-base-ade-640"
+_CHECKPOINT_FOR_DOC = "facebook/Francesco/maskformer-swin-base-ade"
 _FEAT_EXTRACTOR_FOR_DOC = "MaskFormerFeatureExtractor"
 
 MASKFORMER_PRETRAINED_MODEL_ARCHIVE_LIST = [
-    "facebook/maskformer-swin-base-ade-640",
+    "facebook/Francesco/maskformer-swin-base-ade",
     # See all MaskFormer models at https://huggingface.co/models?filter=maskformer
 ]
 
@@ -2421,8 +2421,8 @@ class MaskFormerForInstanceSegmentation(MaskFormerPretrainedModel):
          >>> from transformers import MaskFormerFeatureExtractor, MaskFormerForObjectDetection >>> from PIL import
         Image >>> import requests >>> url = "http://images.cocodataset.org/val2017/000000039769.jpg" >>> image =
         Image.open(requests.get(url, stream=True).raw) >>> feature_extractor =
-        MaskFormerFeatureExtractor.from_pretrained("facebook/maskformer-swin-base-ade-640") >>> model =
-        MaskFormerForInstanceSegmentation.from_pretrained("facebook/maskformer-swin-base-ade-640") >>> inputs =
+        MaskFormerFeatureExtractor.from_pretrained("facebook/Francesco/maskformer-swin-base-ade") >>> model =
+        MaskFormerForInstanceSegmentation.from_pretrained("facebook/Francesco/maskformer-swin-base-ade") >>> inputs =
         feature_extractor(images=image, return_tensors="pt") >>> outputs = model(**inputs) >>> # model predicts
         class_queries_logits of shape `(batch_size, num_queries)` >>> # and masks_queries_logits of shape `(batch_size,
         num_queries, height, width)` >>> class_queries_logits = outputs.class_queries_logits >>> masks_queries_logits =
