@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-import logging
-import os
 from argparse import ArgumentParser
-from cmath import log
 from dataclasses import dataclass
 from pathlib import Path
 from pprint import pformat
@@ -27,13 +24,11 @@ from transformers.models.maskformer.modeling_maskformer import (
     MaskFormerForInstanceSegmentationOutput,
     MaskFormerModel,
     MaskFormerOutput,
-    MaskFormerPixelLevelModuleOutput,
 )
+from transformers.utils import logging
 
 
 StateDict = Dict[str, Tensor]
-from transformers.utils import logging
-
 
 logging.set_verbosity_info()
 logger = logging.get_logger()
@@ -709,9 +704,11 @@ if __name__ == "__main__":
             repo_path_or_name=save_directory / model_name,
             organization="Francesco",
             commit_message="Add model",
+            use_temp_dir=True,
         )
         mask_former_for_instance_segmentation.push_to_hub(
             repo_path_or_name=save_directory / model_name,
             organization="Francesco",
             commit_message="Add model",
+            use_temp_dir=True,
         )

@@ -27,6 +27,7 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import torch
+import torch.distributed as dist
 from torch import Tensor, nn
 from torch.nn.functional import binary_cross_entropy_with_logits, cross_entropy, interpolate
 
@@ -37,12 +38,10 @@ from ...file_utils import (
     add_start_docstrings,
     add_start_docstrings_to_model_forward,
     is_scipy_available,
-    replace_return_docstrings,
     requires_backends,
 )
 from ...modeling_outputs import BaseModelOutput, BaseModelOutputWithCrossAttentions
 from ...modeling_utils import PreTrainedModel, find_pruneable_heads_and_indices, prune_linear_layer
-from ...utils import logging
 from ..detr import DetrConfig
 from ..swin import SwinConfig
 from .configuration_maskformer import MaskFormerConfig
@@ -52,7 +51,6 @@ if is_scipy_available():
     from scipy.optimize import linear_sum_assignment
 
 logger = logging.get_logger(__name__)
-import torch.distributed as dist
 
 
 _CONFIG_FOR_DOC = "MaskFormerConfig"
@@ -453,7 +451,7 @@ def pair_wise_sigmoid_focal_loss(inputs: Tensor, labels: Tensor, alpha: float = 
         Tensor: The computed loss between each pairs
     """
     if alpha < 0:
-        raise ValueError(f"alpha must be positive")
+        raise ValueError("alpha must be positive")
 
     height_and_width: int = inputs.shape[1]
 
@@ -1478,7 +1476,6 @@ class DetrPreTrainedModel(PreTrainedModel):
 
     def _init_weights(self, module):
         std = self.config.init_std
-        xavier_std = self.config.init_xavier_std
 
         if isinstance(module, (nn.Linear, nn.Conv2d, nn.BatchNorm2d)):
             # Slightly different from the TF version which uses truncated_normal for initialization
@@ -2233,7 +2230,7 @@ MASKFORMER_INPUTS_DOCSTRING = r"""
         output_hidden_states (`bool`, *optional*):
             Whether or not to return the hidden states of all layers. See `hidden_states` under returned tensors for
             more detail.
-        
+
         return_dict (`bool`, *optional*):
             Whether or not to return a [`~MaskFormerModelOutput`] instead of a plain tuple.
 """
@@ -2245,7 +2242,6 @@ class MaskFormerPretrainedModel(PreTrainedModel):
     main_input_name = "pixel_values"
 
     def _init_weights(self, module: nn.Module):
-        std = self.config.init_std
         xavier_std = self.config.init_xavier_std
         if isinstance(module, MaskFormerTransformerModule):
             if module.input_projection is not None:
