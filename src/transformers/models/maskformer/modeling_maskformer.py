@@ -31,6 +31,8 @@ import torch.distributed as dist
 from torch import Tensor, nn
 from torch.nn.functional import binary_cross_entropy_with_logits, cross_entropy, interpolate
 
+from transformers.utils import logging
+
 from ...activations import ACT2FN
 from ...file_utils import (
     ModelOutput,
