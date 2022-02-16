@@ -1,8 +1,9 @@
 from __future__ import annotations
-from cmath import log
 
 import logging
+import os
 from argparse import ArgumentParser
+from cmath import log
 from dataclasses import dataclass
 from pathlib import Path
 from pprint import pformat
@@ -649,7 +650,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--pytorch_dump_folder_path",
-        default=Path("/tmp/hf/models"),
+        default=Path("/home/zuppif/Desktop/hf/models"),
         type=Path,
         help="Path to the folder to output PyTorch models.",
     )
@@ -704,5 +705,13 @@ if __name__ == "__main__":
         feature_extractor.save_pretrained(save_directory / model_name)
         mask_former_for_instance_segmentation.save_pretrained(save_directory / model_name)
 
-        feature_extractor.push_to_hub(model_name)
-        mask_former_for_instance_segmentation.push_to_hub(model_name)
+        feature_extractor.push_to_hub(
+            repo_path_or_name=save_directory / model_name,
+            organization="Francesco",
+            commit_message="Add model",
+        )
+        mask_former_for_instance_segmentation.push_to_hub(
+            repo_path_or_name=save_directory / model_name,
+            organization="Francesco",
+            commit_message="Add model",
+        )

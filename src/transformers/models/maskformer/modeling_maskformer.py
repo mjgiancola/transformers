@@ -1496,6 +1496,21 @@ class DetrPreTrainedModel(PreTrainedModel):
             module.gradient_checkpointing = value
 
 
+# Copied from transformers.models.detr.modeling_detr._expand_mask
+def _expand_mask(mask: torch.Tensor, dtype: torch.dtype, tgt_len: Optional[int] = None):
+    """
+    Expands attention_mask from `[bsz, seq_len]` to `[bsz, 1, tgt_seq_len, src_seq_len]`.
+    """
+    bsz, src_len = mask.size()
+    tgt_len = tgt_len if tgt_len is not None else src_len
+
+    expanded_mask = mask[:, None, None, :].expand(bsz, 1, tgt_len, src_len).to(dtype)
+
+    inverted_mask = 1.0 - expanded_mask
+
+    return inverted_mask.masked_fill(inverted_mask.bool(), torch.finfo(dtype).min)
+
+
 # Copied from transformers.models.detr.modeling_detr.DetrDecoder
 class DetrDecoder(DetrPreTrainedModel):
     """
@@ -1964,7 +1979,7 @@ class SwinTransformerBackbone(nn.Module):
         return [layer.dim for layer in self.model.encoder.layers]
 
 
-class FPNConvLayer(nn.Sequential):
+class MaskFormerFPNConvLayer(nn.Sequential):
     def __init__(self, in_features: int, out_features: int, kernel_size: int = 3, padding: int = 1):
         """A basic module that executs conv - norm - in sequence used in MaskFormer.
 
@@ -1979,7 +1994,7 @@ class FPNConvLayer(nn.Sequential):
         )
 
 
-class FPNLayer(nn.Module):
+class MaskFormerFPNLayer(nn.Module):
     def __init__(self, in_features: int, lateral_features: int):
         """A Feature Pyramid Network Layer. It creates a feature map by aggregating features from the previous and backbone layer.
         Due to the spartial mismatch, the tensor coming from the previous layer is upsample.
@@ -1994,7 +2009,7 @@ class FPNLayer(nn.Module):
             nn.GroupNorm(32, in_features),
         )
 
-        self.block = FPNConvLayer(in_features, in_features)
+        self.block = MaskFormerFPNConvLayer(in_features, in_features)
 
     def forward(self, down: Tensor, left: Tensor) -> Tensor:
         left = self.proj(left)
@@ -2004,7 +2019,7 @@ class FPNLayer(nn.Module):
         return down
 
 
-class FPNModel(nn.Module):
+class MaskFormerFPNModel(nn.Module):
     def __init__(self, in_features: int, lateral_widths: List[int], feature_size: int = 256):
         """Feature Pyramid Network, given an input tensor and a set of features map of different feature/spatial size, it creates
         a list of features map with different the same feature size.
@@ -2016,8 +2031,10 @@ class FPNModel(nn.Module):
                 The features (channels) of the resulting feature maps. Defaults to 256.
         """
         super().__init__()
-        self.stem = FPNConvLayer(in_features, feature_size)
-        self.layers = nn.Sequential(*[FPNLayer(feature_size, lateral_width) for lateral_width in lateral_widths[::-1]])
+        self.stem = MaskFormerFPNConvLayer(in_features, feature_size)
+        self.layers = nn.Sequential(
+            *[MaskFormerFPNLayer(feature_size, lateral_width) for lateral_width in lateral_widths[::-1]]
+        )
 
     def forward(self, features: List[Tensor]) -> List[Tensor]:
         fpn_features: List[Tensor] = []
@@ -2042,7 +2059,7 @@ class MaskFormerPixelDecoder(nn.Module):
                 The features (channels) of the target masks size $C_{\epsilon}$ in the paper. Defaults to 256.
         """
         super().__init__()
-        self.fpn = FPNModel(*args, feature_size=feature_size, **kwargs)
+        self.fpn = MaskFormerFPNModel(*args, feature_size=feature_size, **kwargs)
         self.mask_projection = nn.Conv2d(feature_size, mask_feature_size, kernel_size=3, padding=1)
 
     def forward(
@@ -2235,13 +2252,13 @@ class MaskFormerPretrainedModel(PreTrainedModel):
                 nn.init.xavier_uniform_(module.input_projection.weight, gain=xavier_std)
                 nn.init.constant_(module.input_projection.bias, 0)
         # FPN
-        elif isinstance(module, FPNModel):
+        elif isinstance(module, MaskFormerFPNModel):
             nn.init.xavier_uniform_(module.stem[0].weight, gain=xavier_std)
 
-        elif isinstance(module, FPNLayer):
+        elif isinstance(module, MaskFormerFPNLayer):
             nn.init.xavier_uniform_(module.proj[0].weight, gain=xavier_std)
 
-        elif isinstance(module, FPNConvLayer):
+        elif isinstance(module, MaskFormerFPNConvLayer):
             nn.init.xavier_uniform_(module[0].weight, gain=xavier_std)
         # The MLP head
         elif isinstance(module, MaskformerMLPPredictionHead):
@@ -2405,23 +2422,17 @@ class MaskFormerForInstanceSegmentation(MaskFormerPretrainedModel):
         Examples:
 
         ```python
-        >>> from transformers import MaskFormerFeatureExtractor, MaskFormerForObjectDetection
-        >>> from PIL import Image
-        >>> import requests
-        >>> url = "http://images.cocodataset.org/val2017/000000039769.jpg"
-        >>> image = Image.open(requests.get(url, stream=True).raw)
-        >>> feature_extractor = MaskFormerFeatureExtractor.from_pretrained("facebook/maskformer-swin-base-ade-640")
-        >>> model = MaskFormerForInstanceSegmentation.from_pretrained("facebook/maskformer-swin-base-ade-640")
-        >>> inputs = feature_extractor(images=image, return_tensors="pt")
-        >>> outputs = model(**inputs)
-        >>> # model predicts class_queries_logits of shape `(batch_size, num_queries)`
-        >>> # and masks_queries_logits of shape `(batch_size, num_queries, height, width)`
-        >>> class_queries_logits = outputs.class_queries_logits
-        >>> masks_queries_logits = outputs.masks_queries_logits
-        >>> # you can pass them to feature_extractor for postprocessing
-        >>> output = feature_extractor.post_process_segmentation(outputs)
-        >>> output = feature_extractor.post_process_panoptic_segmentation(outputs)
-        """
+         >>> from transformers import MaskFormerFeatureExtractor, MaskFormerForObjectDetection >>> from PIL import
+        Image >>> import requests >>> url = "http://images.cocodataset.org/val2017/000000039769.jpg" >>> image =
+        Image.open(requests.get(url, stream=True).raw) >>> feature_extractor =
+        MaskFormerFeatureExtractor.from_pretrained("facebook/maskformer-swin-base-ade-640") >>> model =
+        MaskFormerForInstanceSegmentation.from_pretrained("facebook/maskformer-swin-base-ade-640") >>> inputs =
+        feature_extractor(images=image, return_tensors="pt") >>> outputs = model(**inputs) >>> # model predicts
+        class_queries_logits of shape `(batch_size, num_queries)` >>> # and masks_queries_logits of shape `(batch_size,
+        num_queries, height, width)` >>> class_queries_logits = outputs.class_queries_logits >>> masks_queries_logits =
+        outputs.masks_queries_logits >>> # you can pass them to feature_extractor for postprocessing >>> output =
+        feature_extractor.post_process_segmentation(outputs) >>> output =
+        feature_extractor.post_process_panoptic_segmentation(outputs)"""
 
         outputs: MaskFormerOutput = self.model(pixel_values, pixel_mask, output_hidden_states, return_dict)
 
