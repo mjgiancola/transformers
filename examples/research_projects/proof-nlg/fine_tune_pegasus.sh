@@ -1,0 +1,14 @@
+python ../../pytorch/summarization/run_summarization.py \
+    --model_name_or_path google/pegasus-xsum \
+    --do_train \
+    --do_eval \
+    --do_predict \
+    --train_file train.json \
+    --validation_file test.json \
+    --test_file test.json \
+    --output_dir ./out \
+    --per_device_train_batch_size=4 \
+    --per_device_eval_batch_size=4 \
+    --overwrite_output_dir \
+    --predict_with_generate \
+    --lang eng
