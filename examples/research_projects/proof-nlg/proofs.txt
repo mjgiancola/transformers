@@ -63,3 +63,46 @@ VIA GIVEN: (Believes! a now (implies (or (Tornado now) (Blizzard now) (Hurricane
 AND: (Believes! a now (or (Tornado now) (Blizzard now) (Hurricane now)))
 VIA DISJUNCTION INTRO IN BELIEF: (Believes! a now (Hurricane now))
 VIA GIVEN: (Believes! a now (Hurricane now))
+
+PROOF: (Desires! a now (SnowBoots now))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (Snowing now) (Desires! a now (SnowBoots now)))), (Believes! a now (Snowing now))
+VIA GIVEN: (Believes! a now (implies (Snowing now) (Desires! a now (SnowBoots now)))) 
+AND GIVEN: (Believes! a now (Snowing now))
+
+PROOF: (Desires! a now (RainBoots now))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (Raining now) (Desires! a now (RainBoots now)))), (Believes! a now (Raining now))
+VIA GIVEN: (Believes! a now (implies (Raining now) (Desires! a now (RainBoots now)))) 
+AND GIVEN: (Believes! a now (Raining now))
+
+PROOF: (Desires! a now (Sunscreen now))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (Sunny now) (Desires! a now (Sunscreen now)))), (Believes! a now (Sunny now))
+VIA GIVEN: (Believes! a now (implies (Sunny now) (Desires! a now (Sunscreen now)))) 
+AND GIVEN: (Believes! a now (Sunny now))
+
+PROOF: (Believes! a now (Thunder now))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (Lightning now) (Thunder now))), (Believes! a now (Lightning now))
+VIA GIVEN: (Believes! a now (implies (Lightning now) (Thunder now)))
+AND GIVEN: (Believes! a now (Lightning now))
+
+PROOF: (Believes! a now (Lightning now))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (Thunder now) (Lightning now))), (Believes! a now (Thunder now))
+VIA GIVEN: (Believes! a now (implies (Thunder now) (Lightning now)))
+AND GIVEN: (Believes! a now (Thunder now))
+
+PROOF: (Believes! a now (Stormy now))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (Lightning now) (Thunder now))), (Believes! a now (Lightning now))
+VIA GIVEN: (Believes! a now (implies (Lightning now) (Thunder now)))
+AND GIVEN: (Believes! a now (Lightning now))
+
+PROOF: (Believes! a now (Rainbow now))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (and (Raining before) (Sunny now)) (Rainbow now))), (Believes! a now (and (Raining before) (Sunny now)))
+VIA GIVEN: (Believes! a now (implies (and (Raining before) (Sunny now)) (Rainbow now)))
+AND: (Believes! a now (and (Raining before) (Sunny now)))
+VIA CONJUNCTION INTRO IN BELIEF: (Believes! a now (Raining before)), (Believes! a now (Sunny now))
+VIA GIVEN: (Believes! a now (Raining before))
+AND GIVEN: (Believes! a now (Sunny now)))
+
+PROOF: (Believes! a now (Raining before))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (Rainbow now) (Raining before))), (Believes! a now (Rainbow now))
+VIA GIVEN: (Believes! a now (implies (Rainbow now) (Raining before)))
+AND GIVEN: (Believes! a now (Rainbow now))

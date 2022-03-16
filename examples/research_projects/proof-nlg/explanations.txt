@@ -17,3 +17,17 @@ The agent desires to avoid driving on the road. This is because the agent believ
 The agent desires to avoid driving on the road. This is because the agent believes if there is a tornado or a blizzard or a hurricane then it should avoid driving on the road, and the agent believes there is a blizzard.
 
 The agent desires to avoid driving on the road. This is because the agent believes if there is a tornado or a blizzard or a hurricane then it should avoid driving on the road, and the agent believes there is a hurricane.
+
+The agent desires snow boots. This is because the agent believes if it is snowing then it should hold this desire, and the agent believes it is snowing.
+
+The agent desires rain boots. This is because the agent believes if it is raining then it should hold this desire, and the agent believes it is raining.
+
+The agent desires sunscreen. This is because the agent believes if it is sunny then it should hold this desire, and the agent believes it is sunny.
+
+The agent believes there is thunder. This is because the agent believes if there is lightning then there is thunder, and the agent believes there is lightning.
+
+The agent believes there is lightning. This is because the agent believes if there is thunder then there is lightning, and the agent believes there is thunder.
+
+The agent believes there is a rainbow now. This is because the agent believes if it rains first and is sunny second then there will be a rainbow, and the agent believes the premise.
+
+The agent believes it was raining earlier. This is because the agent believes if there is a rainbow now then it was raining before, and the agent believes there is a rainbow now.
