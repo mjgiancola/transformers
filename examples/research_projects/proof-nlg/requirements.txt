@@ -1,0 +1,7 @@
+datasets
+nltk
+torch
+torchvision
+torchaudio
+rouge_score
+sentencepiece

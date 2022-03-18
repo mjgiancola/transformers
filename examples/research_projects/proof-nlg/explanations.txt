@@ -36,4 +36,24 @@ The agent believes it is stormy. This is because the agent believes if there are
 
 The agent believes it is not stormy. This is because the agent believes if there are white clouds then it is not stormy, and the agent perceives white clouds.
 
+The agent believes it is sunny and raining. This is because the agent perceives it is sunny and raining.
 
+The agent believes it is sunny and windy. This is because the agent perceives it is sunny and windy.
+
+The agent believes it is windy and raining. This is because the agent perceives it is windy and raining.
+
+The agent believes it is sunny and hot. This is because the agent perceives it is sunny and hot.
+
+The agent believes it is raining and foggy. This is because the agent perceives it is raining and foggy.
+
+The agent believes it is snowing and cold. This is because the agent perceives it is snowing and cold.
+
+The agent believes there is thunder and lightning. This is because the agent perceives thunder and lightning.
+
+The agent believes it is cold and windy. This is because the agent perceives it is cold and windy.
+
+The agent believes it is cold and hailing. This is because the agent perceives it is cold and hailing.
+
+The agent believes it is snowing and windy. This is because the agent perceives it is snowing and windy.
+
+The agent believes it is windy and there is thunder. This is because the agent perceives it is windy and there is thunder.
