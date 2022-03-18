@@ -106,3 +106,19 @@ PROOF: (Believes! a now (Raining before))
 VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (Rainbow now) (Raining before))), (Believes! a now (Rainbow now))
 VIA GIVEN: (Believes! a now (implies (Rainbow now) (Raining before)))
 AND GIVEN: (Believes! a now (Rainbow now))
+
+PROOF: (Believes! a now (Stormy now))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (GrayClouds now) (Stormy now))), (Believes! a now (GrayClouds now))
+VIA GIVEN: (Believes! a now (implies (GrayClouds now) (Stormy now)))
+AND: (Believes! a now (GrayClouds now))
+VIA PERCEPTION TO BELIEF: (Perceives! a now (Stormy now))
+VIA GIVEN: (Perceives! a now (Stormy now))
+
+PROOF: (Believes! a now (not (Stormy now)))
+VIA MODUS PONENS IN BELIEF: (Believes! a now (implies (WhiteClouds now) (not (Stormy now)))), (Believes! a now (WhiteClouds now))
+VIA GIVEN: (Believes! a now (implies (WhiteClouds now) (not (Stormy now))))
+AND: (Believes! a now (WhiteClouds now))
+VIA PERCEPTION TO BELIEF: (Perceives! a now (WhiteClouds now))
+VIA GIVEN: (Perceives! a now (WhiteClouds now))
+
+

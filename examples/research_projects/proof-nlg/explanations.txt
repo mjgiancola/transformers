@@ -31,3 +31,9 @@ The agent believes there is lightning. This is because the agent believes if the
 The agent believes there is a rainbow now. This is because the agent believes if it rains first and is sunny second then there will be a rainbow, and the agent believes the premise.
 
 The agent believes it was raining earlier. This is because the agent believes if there is a rainbow now then it was raining before, and the agent believes there is a rainbow now.
+
+The agent believes it is stormy. This is because the agent believes if there are gray clouds then it is stormy, and the agent perceives gray clouds.
+
+The agent believes it is not stormy. This is because the agent believes if there are white clouds then it is not stormy, and the agent perceives white clouds.
+
+
