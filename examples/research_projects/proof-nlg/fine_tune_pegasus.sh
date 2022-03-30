@@ -3,6 +3,7 @@ python ../../pytorch/summarization/run_summarization.py \
     --do_train \
     --do_eval \
     --do_predict \
+    --num_train_epochs=20 \
     --train_file train.json \
     --validation_file test.json \
     --test_file test.json \

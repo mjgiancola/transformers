@@ -1,0 +1,59 @@
+The agent desires not an umbrella and a rainjacket. This is because the agent believes if it is raining and windy then it should hold this desire, and the agent believes it is rainy and windy.
+
+The agent desires an umbrella or a rainjacket. This is because the agent believes if it is raining and not windy then it should hold this desire, and the agent believes it is rainy and not windy.
+
+The agent desires a snowjacket. This is because the agent believes if it is snowing then it should hold this desire, and the agent believes it is snowing.
+
+The agent desires a windbreaker. This is because the agent believes if it is windy then it should hold this desire, and the agent believes it is windy.
+
+The agent believes there is reduced visibility on the road now. This is because the agent believes if it is foggy then it should hold this belief, and the agent believes it is foggy.
+
+The agent believes the road is slippery. This is because the agent believes if it is raining or snowing then the road is slippery, and the agent believes it is raining.
+
+The agent believes the road is slippery. This is because the agent believes if it is raining or snowing then the road is slippery, and the agent believes it is snowing.
+
+The agent desires to avoid driving on the road. This is because the agent believes if there is a tornado or a blizzard or a hurricane then it should avoid driving on the road, and the agent believes there is a tornado.
+
+The agent desires to avoid driving on the road. This is because the agent believes if there is a tornado or a blizzard or a hurricane then it should avoid driving on the road, and the agent believes there is a blizzard.
+
+The agent desires to avoid driving on the road. This is because the agent believes if there is a tornado or a blizzard or a hurricane then it should avoid driving on the road, and the agent believes there is a hurricane.
+
+The agent desires snow boots. This is because the agent believes if it is snowing then it should hold this desire, and the agent believes it is snowing.
+
+The agent desires rain boots. This is because the agent believes if it is raining then it should hold this desire, and the agent believes it is raining.
+
+The agent desires sunscreen. This is because the agent believes if it is sunny then it should hold this desire, and the agent believes it is sunny.
+
+The agent believes there is thunder. This is because the agent believes if there is lightning then there is thunder, and the agent believes there is lightning.
+
+The agent believes there is lightning. This is because the agent believes if there is thunder then there is lightning, and the agent believes there is thunder.
+
+The agent believes there is a rainbow now. This is because the agent believes if it rains first and is sunny second then there will be a rainbow, and the agent believes the premise.
+
+The agent believes it was raining earlier. This is because the agent believes if there is a rainbow now then it was raining before, and the agent believes there is a rainbow now.
+
+The agent believes it is stormy. This is because the agent believes if there are gray clouds then it is stormy, and the agent perceives gray clouds.
+
+The agent believes it is not stormy. This is because the agent believes if there are white clouds then it is not stormy, and the agent perceives white clouds.
+
+The agent believes it is sunny and raining. This is because the agent perceives it is sunny and raining.
+
+The agent believes it is sunny and windy. This is because the agent perceives it is sunny and windy.
+
+The agent believes it is windy and raining. This is because the agent perceives it is windy and raining.
+
+The agent believes it is sunny and hot. This is because the agent perceives it is sunny and hot.
+
+The agent believes it is raining and foggy. This is because the agent perceives it is raining and foggy.
+
+The agent believes it is snowing and cold. This is because the agent perceives it is snowing and cold.
+
+The agent believes there is thunder and lightning. This is because the agent perceives thunder and lightning.
+
+The agent believes it is cold and windy. This is because the agent perceives it is cold and windy.
+
+The agent believes it is cold and hailing. This is because the agent perceives it is cold and hailing.
+
+The agent believes it is snowing and windy. This is because the agent perceives it is snowing and windy.
+
+The agent believes it is windy and there is thunder. This is because the agent perceives it is windy and there is thunder.
