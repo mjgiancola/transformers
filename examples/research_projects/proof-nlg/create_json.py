@@ -1,4 +1,6 @@
-
+# This script simply takes text files containing the proofs and corresponding explanations
+# and generates a JSON Lines file which can be passed to run_summarization.py for fine-tuning
+# and evaluation
 
 if __name__=='__main__':
     fp1 = open('proofs.txt')

@@ -1,3 +1,7 @@
+# This script loads our fine-tuned model, evaluates it on our held-out test
+# set, and generates pretty-printed output including the input proof, the
+# ground truth explanation, and the transformer's output
+
 from transformers import PegasusTokenizer, PegasusForConditionalGeneration
 import json
 

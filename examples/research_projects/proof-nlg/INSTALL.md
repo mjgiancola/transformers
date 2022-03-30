@@ -13,7 +13,15 @@ cd examples/research_projects/proof-nlg
 pip install -r requirements.txt
 ```
 
-The raw data is provided in `proofs.txt` and `explanations.txt`. Running `python create_json.py` will create a file called `data.json` which will contain the raw data from the two text files in a format which can be passed to Transformers for fine-tuning. You can either use the provided `train.json` and `test.json`, which were used in our experiments, or create your own from `data.json`. (The provided train and test files are just one particular split of the data file.)
+The raw data is provided in `proofs.txt` and `explanations.txt`. Running `python create_json.py` will create a file called `data.json` which will contain the raw data from the two text files in a format which can be passed to Transformers for fine-tuning. You can either use the provided `train.json` and `test.json`, which were used in our experiments, or create your own from `data.json`.
+
+The provided train and test files are just one particular split of the data file. To create them, we ran:
+
+```
+sort -R data.json > data_randomized.json
+head -n 20 data_randomized.json > train.json
+tail -n 10 data_randomized.json > test.json
+```
 
 Next, to create the fine-tuned model, run the following (note that you may wish to modify some settings in the bash file given below):
 
